@@ -14,7 +14,7 @@
 
 - name: make sure zabbix log directory exists
   file:
-    path: /var/log/zabbix-agent/
+    path: /var/log/zabbix/
     owner: zabbix
     group: zabbix
     mode: 0755
@@ -27,6 +27,10 @@
             group=root
             mode=0644
 
-- name: Restart zabbix-agent
+- name: restart zabbix-agent
   service: name=zabbix-agent state=restarted
+  changed_when: False
+
+- name: enable agent on boot zabbix-agent
+  shell: systemctl enable zabbix-agent
   changed_when: False
