@@ -3,11 +3,13 @@
 - name: add zabbix repository key
   apt_key: url=https://repo.zabbix.com/zabbix-official-repo.key state=present
 
-- name: add zabbix repository
-  apt_repository: repo='deb http://repo.zabbix.com/zabbix/3.0/debian jessie main' state=present
-
-- name: add zabbix src repository
-  apt_repository: repo='deb-src http://repo.zabbix.com/zabbix/3.0/debian jessie main' state=present
+- name: "add zabbix repository {{ zabbix_version }}"
+  apt_repository:
+    repo: "{{ item }} http://repo.zabbix.com/zabbix/{{ zabbix_version }}/{{ ansible_distribution.lower() }}/ {{ ansible_distribution_release }} main"
+    state: present
+  with_items:
+    - deb-src
+    - deb
 
 - name: installing zabbix-agent
   apt: name=zabbix-agent state=latest
@@ -27,10 +29,17 @@
             group=root
             mode=0644
 
+- name: add psk
+  copy: content="{{ monitoring_zabbix_key_psk }}" dest=/etc/zabbix/key.psk
+
 - name: restart zabbix-agent
   service: name=zabbix-agent state=restarted
   changed_when: False
 
 - name: enable agent on boot zabbix-agent
-  shell: systemctl enable zabbix-agent
+  service: name=zabbix-agent enabled=yes
   changed_when: False
+
+#- name: enable agent on boot zabbix-agent
+#  shell: systemctl enable zabbix-agent
+#  changed_when: False

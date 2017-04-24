@@ -1,8 +1,14 @@
 ---
+
+zabbix_version: 3.2
+
 monitoring_syslog_host: gojo.hazelfire.com
 monitoring_syslog_port: 10514
 
-monitoring_zabbix_host: service.hazelfire.com
+monitoring_zabbix_host: zabbix.digris.ch
 
 monitoring_zabbix_active_enabled: true
 monitoring_zabbix_passive_enabled: true
+
+# psk key: use in hosts encryption settings
+monitoring_zabbix_key_psk: '*****'

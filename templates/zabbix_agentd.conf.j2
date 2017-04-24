@@ -20,4 +20,12 @@ ServerActive={{ monitoring_zabbix_host }}
 
 HostMetadataItem=system.uname
 
+# encryption
+# we allow to connect *agent-to-server* unencrypted (discovery)
+TLSConnect=unencrypted
+# *server-to-agent* must be encrypted
+TLSAccept=psk
+TLSPSKFile=/etc/zabbix/key.psk
+TLSPSKIdentity=key
+
 Include=/etc/zabbix/zabbix_agentd.d/
