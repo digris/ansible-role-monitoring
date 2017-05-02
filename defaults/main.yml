@@ -2,7 +2,8 @@
 
 zabbix_version: 3.2
 
-monitoring_syslog_host: gojo.hazelfire.com
+monitoring_syslog_enabled: false
+monitoring_syslog_host: syslog.digris.ch
 monitoring_syslog_port: 10514
 
 monitoring_zabbix_host: zabbix.digris.ch
