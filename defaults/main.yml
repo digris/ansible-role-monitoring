@@ -13,3 +13,10 @@ monitoring_zabbix_passive_enabled: true
 
 # psk key: use in hosts encryption settings
 monitoring_zabbix_key_psk: '*****'
+
+
+#############################################
+# Munin-node configuration
+monitoring_munin_node_enabled: false
+monitoring_munin_node_cidr_allow:
+  - 127.0.0.1/32

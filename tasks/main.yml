@@ -9,3 +9,8 @@
   tags: monitoring,zabbix
   become: yes
   when: (monitoring_zabbix_active_enabled is defined and monitoring_zabbix_active_enabled) or (monitoring_zabbix_passive_enabled is defined and monitoring_zabbix_passive_enabled)
+
+- include: munin-node.yml
+  tags: monitoring,munin
+  become: yes
+  when: monitoring_munin_node_enabled is defined and monitoring_munin_node_enabled == true
